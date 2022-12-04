@@ -5,8 +5,33 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:passenger_transportation"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1080" Width="720">
+        Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <ListBox x:Name="staffList" ItemsSource="{Binding}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding ShortId}" FontSize="13"/>
+                        <TextBlock Text="{Binding LastName}" FontSize="16"/>
+                        <TextBlock Text="{Binding Name}" FontSize="13"/>
+                        <TextBlock Text="{Binding Patronymic}" FontSize="13"/>
+                        <TextBlock Text="{Binding BirthdayDate}" FontSize="13"/>
+                        <TextBlock Text="{Binding ContactPhone}" FontSize="13"/>
+                        <TextBlock Text="{Binding Department}" FontSize="13"/>
+                        <TextBlock Text="{Binding Name}" FontSize="16" />
+                        <TextBlock Text="{Binding Age}" FontSize="13" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Content="Добавить" Margin="10" Click="Add_Click" />
+            <Button Content="Изменить" Margin="10" Click="Edit_Click"  />
+            <Button Content="Удалить" Margin="10" Click="Delete_Click"  />
+        </StackPanel>
     </Grid>
 </Window>
