@@ -8,7 +8,7 @@
         public string? Name { get; set; }
         public string? Patronymic { get; set; }
         public string? BirthdayDate { get; set; }
-        public int ContactPhone { get; set; }
+        public long ContactPhone { get; set; }
         public int Department { get; set; }
     }
 }

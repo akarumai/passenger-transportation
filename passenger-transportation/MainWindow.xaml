@@ -22,8 +22,6 @@
                         <TextBlock Text="{Binding BirthdayDate}" FontSize="13"/>
                         <TextBlock Text="{Binding ContactPhone}" FontSize="13"/>
                         <TextBlock Text="{Binding Department}" FontSize="13"/>
-                        <TextBlock Text="{Binding Name}" FontSize="16" />
-                        <TextBlock Text="{Binding Age}" FontSize="13" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
