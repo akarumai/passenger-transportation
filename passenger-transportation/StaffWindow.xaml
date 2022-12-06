@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:passenger_transportation"
         mc:Ignorable="d"
-        Title="StaffWindow" Height="450" Width="800">
+        Title="StaffWindow" Height="450" Width="800" Background="#0E1621">
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="Margin" Value="8" />
@@ -34,23 +34,36 @@
             <ColumnDefinition Width="100" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <TextBlock Text="Короткий ID" Grid.Row="1"/>
-        <TextBlock Text="Фамилия" Grid.Row="2"/>
-        <TextBlock Text="Имя" Grid.Row="3"/>
-        <TextBlock Text="Отчество" Grid.Row="4"/>
-        <TextBlock Text="Дата рождения" Grid.Row="5" />
-        <TextBlock Text="Телефон" Grid.Row="6" />
-        <TextBlock Text="Отдел" Grid.Row="7" />
-        <TextBox Text="{Binding ShortId}" Grid.Column="1" Grid.Row="1"/>
-        <TextBox Text="{Binding LastName}" Grid.Column="1" Grid.Row="2" />
-        <TextBox Text="{Binding Name}" Grid.Column="1" Grid.Row="3" />
-        <TextBox Text="{Binding Patronymic}" Grid.Column="1" Grid.Row="4" />
-        <TextBox Text="{Binding BirthdayDate}" Grid.Column="1" Grid.Row="5" />
-        <TextBox Text="{Binding ContactPhone}" Grid.Column="1" Grid.Row="6" />
-        <TextBox Text="{Binding Department}" Grid.Column="1" Grid.Row="7" />
-        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="9" Grid.Column="1">
-            <Button IsDefault="True" Click="Accept_Click" >OK</Button>
-            <Button IsCancel="True" >Отмена</Button>
+        <TextBlock Text="Короткий ID" Grid.Row="0" Foreground="White"/>
+        <TextBlock Text="Фамилия" Grid.Row="1" Foreground="White"/>
+        <TextBlock Text="Имя" Grid.Row="2" Foreground="White"/>
+        <TextBlock Text="Отчество" Grid.Row="3" Foreground="White"/>
+        <TextBlock Text="Дата рождения" Grid.Row="4" Foreground="White"/>
+        <TextBlock Text="Телефон" Grid.Row="5" Foreground="White"/>
+        <TextBlock Text="Отдел" Grid.Row="6"  Foreground="White"/>
+        <TextBox Text="{Binding ShortId}" Grid.Column="1" Grid.Row="0" BorderBrush="White" Background="#0E1621" Foreground="White"/>
+        <TextBox Text="{Binding LastName}" Grid.Column="1" Grid.Row="1" BorderBrush="White" Background="#0E1621" Foreground="White"/>
+        <TextBox Text="{Binding Name}" Grid.Column="1" Grid.Row="2" BorderBrush="White" Background="#0E1621" Foreground="White"/>
+        <TextBox Text="{Binding Patronymic}" Grid.Column="1" Grid.Row="3" BorderBrush="White" Background="#0E1621" Foreground="White"/>
+        <TextBox Text="{Binding BirthdayDate}" Grid.Column="1" Grid.Row="4" BorderBrush="White" Background="#0E1621" Foreground="White"/>
+        <TextBox Text="{Binding ContactPhone}" Grid.Column="1" Grid.Row="5" BorderBrush="White" Background="#0E1621" Foreground="White"/>
+        <TextBox Text="{Binding Department}" Grid.Column="1" Grid.Row="6" BorderBrush="White" Background="#0E1621" Foreground="White"/>
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="8" Grid.Column="1">
+            <Button IsDefault="True" Click="Accept_Click" Background="#768C9E">
+                OK
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources></Button>
+            <Button IsCancel="True" Background="#768C9E">
+                Отмена
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
         </StackPanel>
     </Grid>
 </Window>

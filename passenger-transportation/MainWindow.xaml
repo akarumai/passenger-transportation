@@ -5,31 +5,52 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:passenger_transportation"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Перевозки" Height="450" Width="800" Background="#242F3D">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
-            <RowDefinition Height="50" />
+            <RowDefinition Height="55" />
         </Grid.RowDefinitions>
-        <ListBox x:Name="staffList" ItemsSource="{Binding}">
+        <ListBox x:Name="staffList" ItemsSource="{Binding}" Background="#0E1621">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding ShortId}" FontSize="13"/>
-                        <TextBlock Text="{Binding LastName}" FontSize="16"/>
-                        <TextBlock Text="{Binding Name}" FontSize="13"/>
-                        <TextBlock Text="{Binding Patronymic}" FontSize="13"/>
-                        <TextBlock Text="{Binding BirthdayDate}" FontSize="13"/>
-                        <TextBlock Text="{Binding ContactPhone}" FontSize="13"/>
-                        <TextBlock Text="{Binding Department}" FontSize="13"/>
-                    </StackPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="190" />
+                            <ColumnDefinition Width="190" />
+                            <ColumnDefinition Width="190" />
+                            <ColumnDefinition Width="190" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding ShortId}" FontSize="16" Grid.Column="0" HorizontalAlignment="Center" Foreground="White"/>
+                        <TextBlock Text="{Binding LastName}" FontSize="16" Grid.Column="1" HorizontalAlignment="Center" Foreground="White"/>
+                        <TextBlock Text="{Binding Name}" FontSize="16" Grid.Column="2" HorizontalAlignment="Left" Foreground="White"/>
+                        <TextBlock Text="{Binding Department}" FontSize="16" Grid.Column="3" HorizontalAlignment="Center" Foreground="White"/>
+                    </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Content="Добавить" Margin="10" Click="Add_Click" />
-            <Button Content="Изменить" Margin="10" Click="Edit_Click"  />
-            <Button Content="Удалить" Margin="10" Click="Delete_Click"  />
+            <Button Content="Добавить" Margin="10" Click="Add_Click" Background="#768C9E" Foreground="White">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Content="Изменить" Margin="10" Click="Edit_Click" Background="#768C9E" Foreground="White">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Content="Удалить" Margin="10" Click="Delete_Click" Background="#768C9E" Foreground="White">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
         </StackPanel>
     </Grid>
 </Window>
