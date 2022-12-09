@@ -48,9 +48,9 @@
         <TextBox Text="{Binding BirthdayDate}" Grid.Column="1" Grid.Row="4" BorderBrush="White" Background="#0E1621" Foreground="White"/>
         <TextBox Text="{Binding ContactPhone}" Grid.Column="1" Grid.Row="5" BorderBrush="White" Background="#0E1621" Foreground="White"/>
         <TextBox Text="{Binding Department}" Grid.Column="1" Grid.Row="6" BorderBrush="White" Background="#0E1621" Foreground="White"/>
-        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="8" Grid.Column="1">
+        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2">
             <Button IsDefault="True" Click="Accept_Click" Background="#768C9E" Foreground="White">
-                OK
+                Oк
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="5"/>
