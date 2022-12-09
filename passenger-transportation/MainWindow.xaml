@@ -52,5 +52,21 @@
                 </Button.Resources>
             </Button>
         </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Экспорт в json" Margin="10" Click="Delete_Click" Background="#768C9E" Foreground="White">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Content="Экспорт в xlsx" Margin="10" Click="Delete_Click" Background="#768C9E" Foreground="White">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+        </StackPanel>
     </Grid>
 </Window>
