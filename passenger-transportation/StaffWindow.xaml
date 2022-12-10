@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:passenger_transportation"
         mc:Ignorable="d"
-        Title="StaffWindow" Height="450" Width="800" Background="#0E1621">
+        Title="Сотрудник" Height="450" Width="800" Background="#0E1621">
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="Margin" Value="8" />

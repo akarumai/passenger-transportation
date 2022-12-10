@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace passenger_transportation
 {
@@ -38,39 +39,43 @@ namespace passenger_transportation
         // редактирование
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
-            // получаем выделенный объект
-            Staff? staff = staffList.SelectedItem as Staff;
-            // если ни одного объекта не выделено, выходим
-            if (staff is null) return;
-
-            StaffWindow StaffWindow = new StaffWindow(new Staff
+            var item = ItemsControl.ContainerFromElement(sender as ListBox, e.OriginalSource as DependencyObject) as ListBoxItem;
+            if (item != null)
             {
-                Id = staff.Id,
-                ShortId = staff.ShortId,
-                LastName = staff.LastName,
-                Name = staff.Name,
-                Patronymic = staff.Patronymic,
-                BirthdayDate = staff.BirthdayDate,
-                ContactPhone = staff.ContactPhone,
-                Department = staff.Department
-    });
+                // получаем выделенный объект
+                Staff? staff = staffList.SelectedItem as Staff;
+                // если ни одного объекта не выделено, выходим
+                if (staff is null) return;
 
-            if (StaffWindow.ShowDialog() == true)
-            {
-                // получаем измененный объект
-                staff = db.Staff.Find(StaffWindow.Staff.Id);
-                if (staff != null)
+                StaffWindow StaffWindow = new StaffWindow(new Staff
                 {
-                    staff.ShortId = StaffWindow.Staff.ShortId;
-                    staff.LastName = StaffWindow.Staff.LastName;
-                    staff.Name = StaffWindow.Staff.Name;
-                    staff.Patronymic = StaffWindow.Staff.Patronymic;
-                    staff.BirthdayDate= StaffWindow.Staff.BirthdayDate;
-                    staff.ContactPhone = StaffWindow.Staff.ContactPhone;
-                    staff.Department = StaffWindow.Staff.Department;
+                    Id = staff.Id,
+                    ShortId = staff.ShortId,
+                    LastName = staff.LastName,
+                    Name = staff.Name,
+                    Patronymic = staff.Patronymic,
+                    BirthdayDate = staff.BirthdayDate,
+                    ContactPhone = staff.ContactPhone,
+                    Department = staff.Department
+                });
 
-                    db.SaveChanges();
-                    staffList.Items.Refresh();
+                if (StaffWindow.ShowDialog() == true)
+                {
+                    // получаем измененный объект
+                    staff = db.Staff.Find(StaffWindow.Staff.Id);
+                    if (staff != null)
+                    {
+                        staff.ShortId = StaffWindow.Staff.ShortId;
+                        staff.LastName = StaffWindow.Staff.LastName;
+                        staff.Name = StaffWindow.Staff.Name;
+                        staff.Patronymic = StaffWindow.Staff.Patronymic;
+                        staff.BirthdayDate = StaffWindow.Staff.BirthdayDate;
+                        staff.ContactPhone = StaffWindow.Staff.ContactPhone;
+                        staff.Department = StaffWindow.Staff.Department;
+
+                        db.SaveChanges();
+                        staffList.Items.Refresh();
+                    }
                 }
             }
         }
@@ -83,6 +88,11 @@ namespace passenger_transportation
             if (user is null) return;
             db.Staff.Remove(user);
             db.SaveChanges();
+        }
+        // Экспорт в json
+        private void Export_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
