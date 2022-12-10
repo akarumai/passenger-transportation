@@ -33,7 +33,12 @@ namespace passenger_transportation
             {
                 Staff User = StaffWindow.Staff;
                 db.Staff.Add(User);
-                db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (DbUpdateException exception) { }
+               
             }
         }
         // редактирование
@@ -87,10 +92,19 @@ namespace passenger_transportation
             // если ни одного объекта не выделено, выходим
             if (user is null) return;
             db.Staff.Remove(user);
-            db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException exception) { }
         }
         // Экспорт в json
-        private void Export_Click(object sender, RoutedEventArgs e)
+        private void Export_Json_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        // Экспорт в xlsx
+        private void Export_Xlsx_Click(object sender, RoutedEventArgs e)
         {
 
         }

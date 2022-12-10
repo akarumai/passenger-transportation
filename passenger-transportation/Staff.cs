@@ -9,6 +9,6 @@
         public string? Patronymic { get; set; }
         public string? BirthdayDate { get; set; }
         public long ContactPhone { get; set; }
-        public int Department { get; set; }
+        public string? Department { get; set; }
     }
 }
