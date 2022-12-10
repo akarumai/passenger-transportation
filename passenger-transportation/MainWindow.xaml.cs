@@ -1,6 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using Newtonsoft.Json;
+using System.Text.Json.Nodes;
+using System.Collections.Generic;
 
 namespace passenger_transportation
 {
@@ -101,7 +106,39 @@ namespace passenger_transportation
         // Экспорт в json
         private void Export_Json_Click(object sender, RoutedEventArgs e)
         {
-
+            InputWindow InputWindow = new InputWindow();
+            var staff = new List<JsonStaff>();
+            foreach (var person in db.Staff.Local.ToObservableCollection())
+            {
+                var obj = new JsonStaff
+                {
+                    Staff = new Staff[]
+                    {
+                        new Staff
+                        {
+                         Id= person.Id,
+                         ShortId = person.ShortId,
+                         LastName = person.LastName,
+                         Name = person.Name,
+                         Patronymic = person.Patronymic,
+                         BirthdayDate = person.BirthdayDate,
+                         ContactPhone = person.ContactPhone,
+                         Department = person.Department
+                        }
+                    }
+                };
+                staff.Add(obj);
+            }
+            var json = JsonConvert.SerializeObject(staff, Formatting.Indented);
+            if (InputWindow.ShowDialog() == true)
+            {
+                File.WriteAllText(InputWindow.pathInput.Text, json);
+            }
+        }
+        public class JsonStaff
+        {
+            [JsonProperty("staff")]
+            public Staff[] Staff { get; set; }
         }
         // Экспорт в xlsx
         private void Export_Xlsx_Click(object sender, RoutedEventArgs e)
