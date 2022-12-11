@@ -135,10 +135,7 @@ namespace passenger_transportation
 
             if (InputWindow.ShowDialog() == true)
             {
-                string strPath = InputWindow.pathInput.Text;
-                if (File.Exists(strPath))
-                    File.Delete(strPath);
-                File.WriteAllText(strPath, json);
+                File.WriteAllText(InputWindow.pathInput.Text, json);
             }
         }
         public class JsonStaff
