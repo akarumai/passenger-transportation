@@ -1,13 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
-using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using Newtonsoft.Json;
-using System.Text.Json.Nodes;
-using System.Collections.Generic;
-using OfficeOpenXml;
-using System.IO.Packaging;
 
 namespace passenger_transportation
 {
@@ -25,9 +19,13 @@ namespace passenger_transportation
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             // гарантируем, что база данных создана
-            db.Database.EnsureCreated();
+            try
+            {
+                db.Database.EnsureCreated();
+                db.Staff.Load();
+            }
+            catch { }
             // загружаем данные из БД
-            db.Staff.Load();
             // и устанавливаем данные в качестве контекста
             DataContext = db.Staff.Local.ToObservableCollection();
         }
@@ -45,6 +43,7 @@ namespace passenger_transportation
                     db.SaveChanges();
                 }
                 catch (DbUpdateException exception) { }
+                catch(ArgumentException exception) { }
                
             }
         }
@@ -108,81 +107,15 @@ namespace passenger_transportation
         // Экспорт в json
         private void Export_Json_Click(object sender, RoutedEventArgs e)
         {
-            InputWindow InputWindow = new InputWindow();
-            var staff = new List<JsonStaff>();
-            foreach (var person in db.Staff.Local.ToObservableCollection())
-            {
-                var obj = new JsonStaff
-                {
-                    Staff = new Staff[]
-                    {
-                        new Staff
-                        {
-                         Id= person.Id,
-                         ShortId = person.ShortId,
-                         LastName = person.LastName,
-                         Name = person.Name,
-                         Patronymic = person.Patronymic,
-                         BirthdayDate = person.BirthdayDate,
-                         ContactPhone = person.ContactPhone,
-                         Department = person.Department
-                        }
-                    }
-                };
-                staff.Add(obj);
-            }
-            var json = JsonConvert.SerializeObject(staff, Formatting.Indented);
-
-            if (InputWindow.ShowDialog() == true)
-            {
-                File.WriteAllText(InputWindow.pathInput.Text, json);
-            }
-        }
-        public class JsonStaff
-        {
-            [JsonProperty("staff")]
-            public Staff[] Staff { get; set; }
+            StaffListJsonReport JsonExport = new StaffListJsonReport();
+            JsonExport.Export_Json(db.Staff.Local.ToObservableCollection());
+            
         }
         // Экспорт в xlsx
         private void Export_Xlsx_Click(object sender, RoutedEventArgs e)
         {
-            InputWindow InputWindow = new InputWindow();
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            ExcelPackage package = new ExcelPackage();
-            ExcelWorksheet sheet = package.Workbook.Worksheets.Add("Лист1");
-            string[] headers = { "Id", "Короткий Id", "Фамилия", "Имя", "Отчество", "Дата рождения", "Телефон", "Отдел" };
-            for (int i = 1; i <= headers.Length; i++)
-            {
-                sheet.Cells[1, i].Value = headers[i-1];
-            }
-            int currString = 2;
-            foreach (var person in db.Staff.Local.ToObservableCollection())
-            {
-                sheet.Cells[currString, 1].Value = person.Id;
-                sheet.Cells[currString, 2].Value = person.ShortId;
-                sheet.Cells[currString, 3].Value = person.LastName;
-                sheet.Cells[currString, 4].Value = person.Name;
-                sheet.Cells[currString, 5].Value = person.Patronymic;
-                sheet.Cells[currString, 6].Value = person.BirthdayDate;
-                sheet.Cells[currString, 7].Value = person.ContactPhone;
-                sheet.Cells[currString, 8].Value = person.Department;
-                currString += 1;
-            }
-            for (int i = 1; i <= headers.Length; i++)
-            {
-                sheet.Column(i).AutoFit();
-            }
-            if (InputWindow.ShowDialog() == true)
-            {
-                string strPath = InputWindow.pathInput.Text;
-                if (File.Exists(strPath))
-                    File.Delete(strPath);
-                FileStream objFileStrm = File.Create(strPath);
-                objFileStrm.Close();
-                File.WriteAllBytes(strPath, package.GetAsByteArray());
-
-            }
-            package.Dispose();
+            StaffListExcelReport ExcelExport = new StaffListExcelReport();
+            ExcelExport.Export_Excel(db.Staff.Local.ToObservableCollection());
         }
     }
 }
