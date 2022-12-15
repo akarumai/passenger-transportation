@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -38,11 +39,18 @@ namespace passenger_transportation
                 staff.Add(obj);
             }
             var json = JsonConvert.SerializeObject(staff, Formatting.Indented);
-
-            if (InputWindow.ShowDialog() == true)
+            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            if (baseDir.Contains("bin"))
             {
-                File.WriteAllText(InputWindow.pathInput.Text, json);
+                int index = baseDir.IndexOf("bin");
+                baseDir = baseDir.Substring(0, index);
             }
+            string pathToDir = $"{baseDir}\\Reports";
+            if (Directory.Exists(pathToDir) == false)
+            {
+                Directory.CreateDirectory(pathToDir);
+            }
+            File.WriteAllText($"{pathToDir}\\report.json", json);
         }
     }
 }

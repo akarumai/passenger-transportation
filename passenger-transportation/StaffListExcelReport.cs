@@ -1,4 +1,5 @@
 ﻿using OfficeOpenXml;
+using System;
 using System.Collections.ObjectModel;
 using System.IO;
 
@@ -34,16 +35,23 @@ namespace passenger_transportation
             {
                 sheet.Column(i).AutoFit();
             }
-            if (InputWindow.ShowDialog() == true)
+            string baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            if (baseDir.Contains("bin"))
             {
-                string strPath = InputWindow.pathInput.Text;
-                if (File.Exists(strPath))
-                    File.Delete(strPath);
-                FileStream objFileStrm = File.Create(strPath);
-                objFileStrm.Close();
-                File.WriteAllBytes(strPath, package.GetAsByteArray());
-
+                int index = baseDir.IndexOf("bin");
+                baseDir = baseDir.Substring(0, index);
             }
+            string pathToDir = $"{baseDir}\\Reports";
+            if (Directory.Exists(pathToDir) == false)
+            {
+                Directory.CreateDirectory(pathToDir);
+            }
+            string pathToFile = $"{pathToDir}\\report.xlsx";
+            if (File.Exists(pathToFile))
+                File.Delete(pathToFile);
+            FileStream objFileStrm = File.Create(pathToFile);
+            objFileStrm.Close();
+            File.WriteAllBytes(pathToFile, package.GetAsByteArray());
             package.Dispose();
         }
     }
