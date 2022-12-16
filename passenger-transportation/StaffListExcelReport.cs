@@ -9,7 +9,6 @@ namespace passenger_transportation
     {
         public void Export_Excel(ObservableCollection<Staff> data)
         {
-            InputWindow InputWindow = new InputWindow();
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
             ExcelPackage package = new ExcelPackage();
             ExcelWorksheet sheet = package.Workbook.Worksheets.Add("Лист1");

@@ -15,7 +15,6 @@ namespace passenger_transportation
         }
         public void Export_Json(ObservableCollection<Staff> data)
         {
-            InputWindow InputWindow = new InputWindow();
             var staff = new List<JsonStaff>();
             foreach (var person in data)
             {
